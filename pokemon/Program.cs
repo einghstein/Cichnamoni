@@ -1,8 +1,24 @@
-﻿
+
 class Program
 {
     static void Main()
     {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         Console.WriteLine("Welcome to Cichnamon Arena!");
         Console.Write("Enter your trainer name: ");
         string playerName = Console.ReadLine();
@@ -60,17 +76,9 @@ class Program
 
             if (!computer.ActiveCichnamon.IsAlive()) break;
 
-            Random rand = new Random();
-            int computerAction = rand.Next(1, 3);
+
             Console.WriteLine("--- COMPUTER TURN ---");
-            if (computerAction == 1)
-            {
-                computer.ActiveCichnamon.PerformBasicAttack(player.ActiveCichnamon);
-            }
-            else
-            {
-                computer.ActiveCichnamon.PerformSpecialAttack(player.ActiveCichnamon);
-            }
+            computer.turn(player.ActiveCichnamon);
         }
 
         if (player.ActiveCichnamon.IsAlive())
