@@ -1,5 +1,5 @@
-class Node
-{ 
+public class Node
+{
     double[] inputs;
     double[] outputs;
     double[][] weights;
@@ -7,16 +7,15 @@ class Node
 
     private static Random rng = new Random();
 
-    public Node (Cichnamon a, Cichnamon b)
+    public Node(double[][] TweaksWeights, double[] TweaksBiasis)
     {
-        this.inputs = [0, 0];
-        this.outputs = [0, 0, 0];
-        this.biasis = [rng.NextDouble(), rng.NextDouble(), rng.NextDouble()];
-        for (int x; x < 1; x++)
+        this.weights = TweaksWeights;
+        this.biasis = [rng.NextDouble() + TweaksBiasis[0], rng.NextDouble() + TweaksBiasis[1], rng.NextDouble() + TweaksBiasis[2]];
+        for (int x = 0; x < 1; x++)
         {
-            for (int y; y < 2; y++)
+            for (int y = 0; y < 2; y++)
             {
-                this.weights[x][y] = rng.NextDouble();
+                this.weights[x][y] += rng.NextDouble();
             }
         }
     }
@@ -27,12 +26,13 @@ class Node
         this.outputs = [weights[0][0] * inputs[0] + weights[1][0] * inputs[1] + biasis[0],
                         weights[0][1] * inputs[0] + weights[1][1] * inputs[1] + biasis[1],
                         weights[0][2] * inputs[0] + weights[1][2] * inputs[1] + biasis[2]];
-        foreach (var x in outputs)
+        for (int i = 0; i < 2; i++)
         {
-            if (x < 0)
+            if (outputs[i] < 0)
             {
-                x = 0;
+                this.outputs[i] = 0;
             }
+
         }
         return outputs;
 
